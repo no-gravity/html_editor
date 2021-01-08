@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HTML Editor</title>
+	</head>
+
+	<body>
+
+		<style>
+
+			html
+			{
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+
+			body
+			{
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}
+
+			textarea
+			{
+				padding: 10px;
+				resize: none;
+				width: calc( 100% - 20px );
+				height: 70%;
+				margin: 0;
+				border: 0;
+			}
+
+			textarea:focus
+			{
+				outline: none;
+			}
+
+			iframe
+			{
+				margin: 0;
+				border: 0;
+				height: 50%;
+			}
+
+			.controls
+			{
+				border-top   : 1px solid #808080;
+				border-bottom: 1px solid #808080;
+				padding: 10px;
+				white-space: nowrap;
+				overflow-x: auto;
+				min-height: 23px;
+			}
+
+			.controls a, .controls label
+			{
+				text-decoration: none;
+				color: #000000;
+				user-select: none;
+				padding: 8px;
+				cursor: pointer;
+			}
+
+			.controls a:hover, .controls label:hover
+			{
+				background: #f0f0f0;
+			}
+
+		</style>
+
+<textarea id=data><!doctype html>
+<html>
+ <body>
+
+  <style>
+    body {
+      padding: 50px;
+    }
+    span {
+      display: inline-block;
+      background: #a0ffa0;
+      padding: 20px;
+    }
+  </style>
+
+  <span>
+    Edit the page on top, see 
+    the result on the bottom.
+  </span>
+
+ </body>
+</html></textarea>
+  
+		<div class=controls>
+			<label>
+				<input type=checkbox id=realtime onclick="update()" checked>
+				realtime
+			</label> | 
+			<a href=# onClick="update()">update</a> |
+			<a href=# onClick="goFullscreen(false)">fullscreen</a> |
+			<a href=# onClick="goFullscreen(true)" >new fullscreen</a> |
+			<a href="https://github.com/no-gravity/html_editor"
+			   target=_blank>github</a>
+		</div>
+		<iframe name=hello style="width: 100%; height: 100%"></iframe>
+
+		<script>
+
+			function update()
+			{
+				let outty = window.hello.document;
+				outty.open();
+				let inny=document.getElementById("data");
+				outty.write(inny.value);
+				outty.close();
+			};
+
+			function goFullscreen(newWin)
+			{
+				if (newWin) outWin= window.open()
+				else        outWin= window.open("about:blank","html_editor");
+				outWin.focus();
+				let outty = outWin.document;
+				outty.open();
+				let inny=document.getElementById("data");
+				outty.write(inny.value);
+				outty.close();
+			}
+
+			function realtime()
+			{
+				if (!document.querySelector("#realtime").checked) return;
+				update();
+			}
+
+			dataArea=document.getElementById("data");
+			dataArea.onkeyup=realtime;
+
+			update();
+
+		</script>
+
+	</body>
+</html>
