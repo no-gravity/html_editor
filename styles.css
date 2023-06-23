@@ -1,0 +1,68 @@
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #F8F9FA;
+    --text-color: #212529;
+}
+
+body {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    font-family: Arial, sans-serif;
+    color: #FFF;
+    padding: 30px;
+}
+
+.logo {
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: block;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.hero-image {
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+#bambu-form {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#bambu-form section {
+    margin-bottom: 10px;
+}
+
+#bambu-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+}
+
+#bambu-form input[type="text"],
+#bambu-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: black;
+}
+
+#bambu-form button[type="submit"] {
+    background-color: #1e3c72;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
