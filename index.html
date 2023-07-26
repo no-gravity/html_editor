@@ -2,11 +2,12 @@
 Real-Time HTML Editor by @aaviator42
 v1.0 : 2023-07-26
 https://github.com/aaviator42/html_editor
-
+License: GPLv2
 
 Based on https://github.com/no-gravity/html_editor
 
 Additions: dark mode for editor, resizable editor, tab char support
+
 -->
 
 <!DOCTYPE html>
@@ -68,48 +69,59 @@ Additions: dark mode for editor, resizable editor, tab char support
 
 			.controls
 			{
-				border-top   : 1px solid #808080;
-				border-bottom: 1px solid #808080;
+				border-top   : 1px solid black;
+				border-bottom: 1px solid black;
 				padding: 4px;
 				white-space: nowrap;
 				overflow-x: auto;
 				min-height: 23px;
+				background-color: purple;
+				color: white;
 			}
+			
 
 			.controls a, .controls label
 			{
 				text-decoration: none;
-				color: #000000;
+				color: pink;
 				user-select: none;
 				padding: 8px;
 				cursor: pointer;
+				font-family: monospace;
 			}
 
 			.controls a:hover, .controls label:hover
 			{
-				background: #f0f0f0;
+				background: mediumorchid;
+			}
+			
+			input {
+				accent-color: black;
 			}
 
 		</style>
 
-<textarea id=data><!doctype html>
+<textarea id=data><!DOCTYPE html>
 <html>
 	<body>
 
 	<style>
 		body {
-			padding: 1rem;
+			background-color: lemonchiffon;
+			font-family: Verdana;
 		}
 		span {
 			display: inline-block;
-			background: #a0ffa0;
+			background: lightpink;
 			padding: 20px;
 		}
 	</style>
 
 	<span>
-	Edit the page on top, see 
-	the result on the bottom.
+	Edit the page source on top, <br>
+	see the results on the bottom. 
+	<br><br>
+	Supports HTML, CSS and JS.
 	</span>
 
 	</body>
@@ -123,6 +135,8 @@ Additions: dark mode for editor, resizable editor, tab char support
 			<a href=# onClick="update()">update</a> |
 			<a href=# onClick="goFullscreen(false)">fullscreen</a> |
 			<a href=# onClick="goFullscreen(true)" >new fullscreen</a> |
+			<a href="#" onClick="saveAsFile()">save page</a> |
+			<a href="vert.html">vert</a> |
 			<a href="https://github.com/aaviator42/html_editor"
 			   target=_blank>github</a>
 		</div>
@@ -185,6 +199,64 @@ Additions: dark mode for editor, resizable editor, tab char support
 				}
 			});
 		</script>
+	    <script>
+			//save page upon ctrl+s or 'save page' button.
+			document.addEventListener("keydown", function(event) {
+				// Check if Ctrl+S or Cmd+S is pressed
+				if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+					event.preventDefault(); // Prevent the default browser save action
+					saveAsFile();
+				}
+			});
+			
+			function saveAsFile() {
+				const textareaData = document.getElementById("data").value;
+				const blob = new Blob([textareaData], { type: "text/html" });
 
+				const currentDate = new Date();
+				const day = String(currentDate.getDate()).padStart(2, "0");
+				const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+				const year = String(currentDate.getFullYear()).slice(-2);
+				const hours = String(currentDate.getHours()).padStart(2, "0");
+				const minutes = String(currentDate.getMinutes()).padStart(2, "0");
+
+				const fileName = `code_${year}-${month}-${day}_${hours}${minutes}.html`;
+				const url = URL.createObjectURL(blob);
+
+				const downloadLink = document.createElement("a");
+				downloadLink.href = url;
+				downloadLink.download = fileName;
+
+				document.body.appendChild(downloadLink);
+				downloadLink.click();
+
+				document.body.removeChild(downloadLink);
+				URL.revokeObjectURL(url);
+			}
+
+		</script>
+		<script>
+		// persistent textarea memory
+        // Function to load the remembered text from localStorage
+        function loadRememberedText() {
+            const rememberedText = localStorage.getItem('rememberedText');
+            if (rememberedText) {
+                document.getElementById('data').value = rememberedText;
+            }
+			update();			
+        }
+
+        // Function to save the text in localStorage
+        function saveText() {
+            const textToRemember = document.getElementById('data').value;
+            localStorage.setItem('rememberedText', textToRemember);
+        }
+
+        // Load the remembered text when the page loads
+        loadRememberedText();
+
+        // Save the text in localStorage whenever it changes
+        document.getElementById('data').addEventListener('input', saveText);
+    </script>
 	</body>
 </html>
