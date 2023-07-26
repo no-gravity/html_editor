@@ -6,6 +6,6 @@ A lean and fast html editor with instant preview
 [Demo](https://aavi.xyz/proj/editor)
 
 Based on [no-gravity/html_editor](https://github.com/no-gravity/html_editor).  
-Enhancements: dark mode editor, edjustable aditor height, tab char support, etc.
+Enhancements: dark mode editor, edjustable aditor height, tab char support, autosave, vertical layout, etc.
 
 License: GNU General Public License, version 2
