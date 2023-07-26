@@ -1,4 +1,5 @@
-## Real-Time HTML EditorA lean and fast html editor with instant preview
+## Real-Time HTML Editor
+A lean and fast html editor with instant preview
 
 `v1.1`: `2023-07-26`
 
