@@ -1,3 +1,12 @@
+<!-- 
+HTML Editor by @aaviator42
+v1.0 : 2023-07-26
+Based on https://github.com/no-gravity/html_editor
+
+Additions: dark mode for editor, resizable editor, tab char support
+
+-->
+
 <!doctype html>
 
 <html>
@@ -31,11 +40,15 @@
 			textarea
 			{
 				padding: 10px;
-				resize: none;
+				resize: vertical;
 				width: calc( 100% - 20px );
-				height: 70%;
+				height: 100%;
 				margin: 0;
 				border: 0;
+				background-color: black;
+				color: white;
+				font-family: monospace;
+				tab-size: 4;
 			}
 
 			textarea:focus
@@ -54,7 +67,7 @@
 			{
 				border-top   : 1px solid #808080;
 				border-bottom: 1px solid #808080;
-				padding: 10px;
+				padding: 4px;
 				white-space: nowrap;
 				overflow-x: auto;
 				min-height: 23px;
@@ -78,25 +91,25 @@
 
 <textarea id=data><!doctype html>
 <html>
- <body>
+	<body>
 
-  <style>
-    body {
-      padding: 50px;
-    }
-    span {
-      display: inline-block;
-      background: #a0ffa0;
-      padding: 20px;
-    }
-  </style>
+	<style>
+		body {
+			padding: 1rem;
+		}
+		span {
+			display: inline-block;
+			background: #a0ffa0;
+			padding: 20px;
+		}
+	</style>
 
-  <span>
-    Edit the page on top, see 
-    the result on the bottom.
-  </span>
+	<span>
+	Edit the page on top, see 
+	the result on the bottom.
+	</span>
 
- </body>
+	</body>
 </html></textarea>
   
 		<div class=controls>
@@ -107,7 +120,7 @@
 			<a href=# onClick="update()">update</a> |
 			<a href=# onClick="goFullscreen(false)">fullscreen</a> |
 			<a href=# onClick="goFullscreen(true)" >new fullscreen</a> |
-			<a href="https://github.com/no-gravity/html_editor"
+			<a href="https://github.com/aaviator42/html_editor"
 			   target=_blank>github</a>
 		</div>
 		<iframe name=hello style="width: 100%; height: 100%"></iframe>
@@ -146,6 +159,28 @@
 
 			update();
 
+		</script>
+		<script>
+		
+			//for tab char support in textarea
+			const textarea = document.getElementById('data');
+
+			textarea.addEventListener('keydown', function(e) {
+				if (e.key === 'Tab') {
+					e.preventDefault();
+
+					// Get the current cursor position
+					const start = this.selectionStart;
+					const end = this.selectionEnd;
+
+					// Insert a tab character at the current position
+					const tab = '\t';
+					this.value = this.value.substring(0, start) + tab + this.value.substring(end);
+
+					// Move the cursor to the new position after the tab
+					this.selectionStart = this.selectionEnd = start + tab.length;
+				}
+			});
 		</script>
 
 	</body>
