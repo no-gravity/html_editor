@@ -106,10 +106,13 @@
             </label> |
             <a href=# onClick="update()">update</a> |
             <a href=# onClick="goFullscreen()" >fullscreen</a> |
+            <a href=# onClick="render()" >render</a> |
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
         <iframe name=hello style="width: 100%; height: 100%"></iframe>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script>
 
@@ -137,6 +140,13 @@
             {
                 if (!document.querySelector("#realtime").checked) return;
                 update();
+            }
+
+            async function render() {
+                let inny=document.querySelector("iframe").contentDocument.body;
+                let dataUrl = await domtoimage.toPng(inny);
+                let w = window.open();
+                w.location.href=dataUrl;
             }
 
             dataArea=document.getElementById("data");
