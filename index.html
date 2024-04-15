@@ -105,8 +105,7 @@
                 realtime
             </label> |
             <a href=# onClick="update()">update</a> |
-            <a href=# onClick="goFullscreen(false)">fullscreen</a> |
-            <a href=# onClick="goFullscreen(true)" >new fullscreen</a> |
+            <a href=# onClick="goFullscreen()" >fullscreen</a> |
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
@@ -123,10 +122,9 @@
                 outty.close();
             };
 
-            function goFullscreen(newWin)
+            function goFullscreen()
             {
-                if (newWin) outWin= window.open()
-                else        outWin= window.open("about:blank","html_editor");
+                outWin= window.open()
                 outWin.focus();
                 let outty = outWin.document;
                 outty.open();
