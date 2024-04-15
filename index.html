@@ -142,11 +142,18 @@
                 update();
             }
 
-            async function render() {
+            function render() {
+                outWin= window.open()
+                outWin.focus();
+                _render(outWin);
+            }
+
+            async function _render(outWin) {
                 let inny=document.querySelector("iframe").contentDocument.body;
                 let dataUrl = await domtoimage.toPng(inny);
-                let w = window.open();
-                w.location.href=dataUrl;
+                let img = document.createElement('img');
+                img.src = dataUrl;
+                outWin.document.body.appendChild(img);
             }
 
             dataArea=document.getElementById("data");
