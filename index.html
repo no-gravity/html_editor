@@ -43,11 +43,12 @@
                 outline: none;
             }
 
-            iframe
+            #codeframe
             {
                 margin: 0;
                 border: 0;
-                height: 50%;
+                width: 100%;
+                height: 100%;
             }
 
             .controls
@@ -110,7 +111,7 @@
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
-        <iframe name=hello style="width: 100%; height: 100%"></iframe>
+        <iframe id=codeframe style="width: 100%; height: 100%"></iframe>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -118,7 +119,13 @@
 
             function update()
             {
-                let outty = window.hello.document;
+                let newIframe = document.createElement('iframe');
+                document.body.replaceChild(
+                    newIframe,
+                    document.querySelector('#codeframe'),
+                );
+                newIframe.id='codeframe';
+                let outty = newIframe.contentWindow.document;
                 outty.open();
                 let inny=document.getElementById("data");
                 outty.write(inny.value);
