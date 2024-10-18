@@ -112,6 +112,7 @@
             <span onClick="update()">update</span> |
             <span onClick="goFullscreen()" >fullscreen</span> |
             <span onClick="render()" >render</span> |
+            <span onClick="clearData()" >clear</span> |
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
@@ -157,6 +158,11 @@
                 outWin= window.open()
                 outWin.focus();
                 _render(outWin);
+            }
+
+            function clearData() {
+                document.querySelector('#data').value='';
+                update();
             }
 
             async function _render(outWin) {
