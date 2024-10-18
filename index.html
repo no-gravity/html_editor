@@ -61,7 +61,9 @@
                 min-height: 23px;
             }
 
-            .controls a, .controls label
+            .controls a,
+            .controls span,
+            .controls label
             {
                 text-decoration: none;
                 color: #000000;
@@ -70,7 +72,9 @@
                 cursor: pointer;
             }
 
-            .controls a:hover, .controls label:hover
+            .controls a:hover,
+            .controls span:hover,
+            .controls label:hover
             {
                 background: #f0f0f0;
             }
@@ -105,9 +109,9 @@
                 <input type=checkbox id=realtime onclick="update()" checked>
                 realtime
             </label> |
-            <a href=# onClick="update()">update</a> |
-            <a href=# onClick="goFullscreen()" >fullscreen</a> |
-            <a href=# onClick="render()" >render</a> |
+            <span onClick="update()">update</span> |
+            <span onClick="goFullscreen()" >fullscreen</span> |
+            <span onClick="render()" >render</span> |
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
