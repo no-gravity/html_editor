@@ -174,26 +174,22 @@
                 outWin.document.body.appendChild(img);
             }
 
-            async function saveFile() {
-                const options = {
-                    suggestedName: 'document.html',
-                    types: [{
-                        description: 'HTML Files',
-                        accept: {'text/html': ['.html']},
-                    }],
-                };
+            function saveFile() {
+                const content = document.getElementById('data').value;
+                const blob = new Blob([content], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
 
-                try {
-                    const handle = await window.showSaveFilePicker(options);
-                    const writable = await handle.createWritable();
-                    const content = document.getElementById('data').value;
-                    await writable.write(content);
-                    await writable.close();
-                    alert('File saved successfully!');
-                } catch (err) {
-                    console.error('Save failed:', err);
-                }
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'document.html';
+
+                document.body.appendChild(link);
+
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
             }
+
 
             dataArea=document.getElementById("data");
             dataArea.onkeyup=realtime;
