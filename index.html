@@ -47,7 +47,7 @@
                 outline: none;
             }
 
-            #codeframe
+            #resulframe
             {
                 margin: 0;
                 border: 0;
@@ -95,7 +95,7 @@
                 border-right: 1px solid #000000;
             }
 
-            body:has(#horizontal:checked) #codeframe {
+            body:has(#horizontal:checked) #resulframe {
                 grid-area: iframe;
             }
 
@@ -144,7 +144,7 @@
             <a href="https://github.com/no-gravity/html_editor"
                target=_blank>github</a>
         </div>
-        <iframe id=codeframe></iframe>
+        <iframe id=resulframe></iframe>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -156,9 +156,9 @@
                 let newIframe = document.createElement('iframe');
                 document.body.replaceChild(
                     newIframe,
-                    document.querySelector('#codeframe'),
+                    document.querySelector('#resulframe'),
                 );
-                newIframe.id='codeframe';
+                newIframe.id='resulframe';
                 let outty = newIframe.contentWindow.document;
                 outty.open();
                 let inny=document.getElementById("data");
