@@ -83,26 +83,29 @@
                 background: #f0f0f0;
             }
 
-            body:has(#horizontal:checked) {
+            body.horizontal {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 1fr auto;
                 grid-template-areas:
                     "textarea iframe"
                     "controls controls";
+                textarea {
+                    border-right: 1px solid #000000;
+                }
+                #resulframe {
+                    grid-area: iframe;
+                }
+                .controls {
+                    grid-area: controls;
+                }
             }
 
-            body:has(#horizontal:checked) textarea {
-                border-right: 1px solid #000000;
+            body.edit_only {
+                grid-template-rows: 1fr auto;
+                #resulframe {
+                    display: none;
+                }
             }
-
-            body:has(#horizontal:checked) #resulframe {
-                grid-area: iframe;
-            }
-
-            body:has(#horizontal:checked) .controls {
-                grid-area: controls;
-            }
-
         </style>
 
 <textarea id=data><!doctype html>
@@ -133,10 +136,11 @@
                 <input type=checkbox id=realtime onclick="update()" checked>
                 realtime
             </label> |
-            <label>
-                <input type=checkbox id=horizontal>
-                horizontal
-            </label> |
+            <select id="layout" onchange="updateLayout()">
+                <option value="vertical">vertical</option>
+                <option value="horizontal">horizontal</option>
+                <option value="edit only">edit only</option>
+            </select> |
             <span onClick="update()">update</span> |
             <span onClick="goFullscreen()" >fullscreen</span> |
             <span onClick="render()" >render</span> |
@@ -153,6 +157,7 @@
             // We need to create a new iframe on every update, so that the JS state does not stick around. Example of a problem that would cause: When defining a variable in the top scope with "let", the second update fails.
             function update()
             {
+                if (document.querySelector('#layout').value === 'edit only') return;
                 let newIframe = document.createElement('iframe');
                 document.body.replaceChild(
                     newIframe,
@@ -192,6 +197,20 @@
             function clearData() {
                 document.querySelector('#data').value = '';
                 update();
+            }
+
+            function updateLayout() {
+                let layout = document.querySelector('#layout').value;
+                if (layout === 'horizontal') {
+                    document.body.classList.add("horizontal");
+                    document.body.classList.remove("edit_only");
+                } else if (layout === 'edit only') {
+                    document.body.classList.add("edit_only");
+                    document.body.classList.remove("horizontal");
+                } else {
+                    document.body.classList.remove("horizontal");
+                    document.body.classList.remove("edit_only");
+                }
             }
 
             async function _render(outWin) {
