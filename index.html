@@ -40,6 +40,7 @@
                 height: 100%;
                 margin: 0;
                 border: 0;
+                font-size: 12px;
             }
 
             textarea:focus
@@ -140,7 +141,7 @@
                 <option value="vertical">vertical</option>
                 <option value="horizontal">horizontal</option>
                 <option value="edit only">edit only</option>
-            </select> |
+            </select> | <label>Font Size: <input type="number" id="fontSize" value="12" onchange="changeFontSize()" style="width:50px;"></label> |
             <span onClick="update()">update</span> |
             <span onClick="goFullscreen()" >fullscreen</span> |
             <span onClick="render()" >render</span> |
@@ -199,6 +200,16 @@
                 update();
             }
 
+            function changeFontSize() {
+                var fontSizeInput = document.getElementById("fontSize");
+                var newSize = parseInt(fontSizeInput.value);
+                if(isNaN(newSize)) {
+                    newSize = 12;
+                }
+                var textArea = document.getElementById("data");
+                textArea.style.fontSize = newSize + "px";
+            }
+
             function updateLayout() {
                 let layout = document.querySelector('#layout').value;
                 if (layout === 'horizontal') {
@@ -225,6 +236,7 @@
             dataArea.onkeyup = realtime;
 
             update();
+            changeFontSize();
 
         </script>
 
