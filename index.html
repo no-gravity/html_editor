@@ -150,6 +150,7 @@
 
         <script>
 
+            // We need to create a new iframe on every update, so that the JS state does not stick around. Example of a problem that would cause: When defining a variable in the top scope with "let", the second update fails.
             function update()
             {
                 let newIframe = document.createElement('iframe');
@@ -167,11 +168,11 @@
 
             function goFullscreen()
             {
-                outWin= window.open()
+                let outWin = window.open()
                 outWin.focus();
                 let outty = outWin.document;
                 outty.open();
-                let inny=document.getElementById("data");
+                let inny = document.getElementById("data");
                 outty.write(inny.value);
                 outty.close();
             }
@@ -183,26 +184,26 @@
             }
 
             function render() {
-                outWin= window.open()
+                let outWin = window.open()
                 outWin.focus();
                 _render(outWin);
             }
 
             function clearData() {
-                document.querySelector('#data').value='';
+                document.querySelector('#data').value = '';
                 update();
             }
 
             async function _render(outWin) {
-                let inny=document.querySelector("iframe").contentDocument.body;
+                let inny = document.querySelector("iframe").contentDocument.body;
                 let dataUrl = await domtoimage.toPng(inny);
                 let img = document.createElement('img');
                 img.src = dataUrl;
                 outWin.document.body.appendChild(img);
             }
 
-            dataArea=document.getElementById("data");
-            dataArea.onkeyup=realtime;
+            let dataArea = document.getElementById("data");
+            dataArea.onkeyup = realtime;
 
             update();
 
