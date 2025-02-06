@@ -12,6 +12,10 @@
 
         <style>
 
+            :root {
+                --controls-color: #303030;
+            }
+
             * {
                 box-sizing: border-box;
             }
@@ -79,17 +83,27 @@
             .controls label
             {
                 text-decoration: none;
-                color: #000000;
+                color: var(--controls-color);
                 user-select: none;
                 padding: 8px;
                 cursor: pointer;
             }
 
+            .controls select,
+            .controls input {
+                color: var(--controls-color);
+            }
+
             .controls a:hover,
             .controls span:hover,
-            .controls label:hover
+            .controls label:hover,
+            .controls input:focus
             {
-                background: #f0f0f0;
+                color: #000000;
+            }
+
+            input[type="checkbox"] {
+                accent-color: #808080;
             }
 
             body.horizontal {
@@ -144,19 +158,19 @@
         <div class=controls>
             <label>
                 <input type=checkbox id=realtime onclick="update()" checked>
-                realtime
+                Realtime
             </label> |
             <select id="layout" onchange="updateLayout()">
-                <option value="vertical">vertical</option>
-                <option value="horizontal">horizontal</option>
-                <option value="edit only">edit only</option>
+                <option value="vertical">Vertical</option>
+                <option value="horizontal">Horizontal</option>
+                <option value="edit only">Edit Only</option>
             </select> | <label>Font Size: <input type="number" id="fontSize" value="12" onchange="changeFontSize()" style="width:50px;"></label> |
-            <span onClick="update()">update</span> |
-            <span onClick="goFullscreen()" >fullscreen</span> |
-            <span onClick="render()" >render</span> |
-            <span onClick="clearData()" >clear</span> |
+            <span onClick="update()">Update</span> |
+            <span onClick="goFullscreen()" >Fullscreen</span> |
+            <span onClick="render()" >Render</span> |
+            <span onClick="clearData()" >Clear</span> |
             <a href="https://github.com/no-gravity/html_editor"
-               target=_blank>github</a>
+               target=_blank>Github</a>
         </div>
         <iframe id=resulframe></iframe>
 
