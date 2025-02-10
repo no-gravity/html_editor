@@ -47,7 +47,7 @@ function changeFontSize() {
     var fontSizeInput = document.getElementById("fontSize");
     var newSize = parseInt(fontSizeInput.value);
     if(isNaN(newSize)) {
-        newSize = 12;
+        newSize = 14;
     }
     var textArea = document.getElementById("data");
     textArea.style.fontSize = newSize + "px";
