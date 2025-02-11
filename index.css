@@ -63,30 +63,27 @@ textarea:focus
     white-space: nowrap;
     overflow-x: auto;
     min-height: 30px;
-}
-
-.controls a,
-.controls span,
-.controls label
-{
-    text-decoration: none;
-    color: var(--controls-color);
-    user-select: none;
-    padding: 8px;
-    cursor: pointer;
-}
-
-.controls select,
-.controls input {
-    color: var(--controls-color);
-}
-
-.controls a:hover,
-.controls span:hover,
-.controls label:hover,
-.controls input:focus
-{
-    color: #000000;
+    font-family: arial;
+    font-size: 15.5px;
+    a, span, label
+    {
+        text-decoration: none;
+        color: var(--controls-color);
+        user-select: none;
+        padding: 8px;
+        cursor: pointer;
+    }
+    select, input {
+        color: var(--controls-color);
+    }
+    select {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    a:hover, span:hover, label:hover, input:focus
+    {
+        color: #000000;
+    }
 }
 
 input[type="checkbox"] {
