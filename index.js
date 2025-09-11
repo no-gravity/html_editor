@@ -53,6 +53,13 @@ function changeFontSize() {
     textArea.style.fontSize = newSize + "px";
 }
 
+function printFrame() {
+    const iframe = document.getElementById('resultframe');
+    const iframeWindow = iframe.contentWindow;
+    iframeWindow.focus();
+    iframeWindow.print();
+}
+
 function updateLayout() {
     let layout = document.querySelector('#layout').value;
     if (layout === 'horizontal') {
