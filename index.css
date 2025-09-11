@@ -47,7 +47,7 @@ textarea:focus
     outline: none;
 }
 
-#resulframe
+#resultframe
 {
     margin: 0;
     border: 0;
@@ -99,7 +99,7 @@ body.horizontal {
     textarea {
         border-right: 1px solid #000000;
     }
-    #resulframe {
+    #resultframe {
         grid-area: iframe;
     }
     .controls {
@@ -110,7 +110,7 @@ body.horizontal {
 
 body.edit_only {
     grid-template-rows: 1fr auto;
-    #resulframe {
+    #resultframe {
         display: none;
     }
 }

@@ -5,9 +5,9 @@ function update()
     let newIframe = document.createElement('iframe');
     document.body.replaceChild(
         newIframe,
-        document.querySelector('#resulframe'),
+        document.querySelector('#resultframe'),
     );
-    newIframe.id='resulframe';
+    newIframe.id='resultframe';
     let outty = newIframe.contentWindow.document;
     outty.open();
     let inny=document.getElementById("data");
